@@ -1,1 +1,56 @@
+# Mamasa WECRA
+Mamasa WECRA (Weaving Craft Marketplace) adalah aplikasi toko online berbasis Laravel yang menjual kain tenun khas Mamasa secara digital.
+
+# Role & Aktivitas: 
+1. Admin
+- Mereview dan memantau aktivitas pengguna dan transaksi.
+
+2. Penjual
+- Menambah, mengedit, dan menghapus produk
+- Melihat daftar produk mereka sendiri
+- Melihat riwayat transaksi terkait produk yang dijual
+
+3. Pembeli
+- Melihat dan mencari produk
+- Melakukan pembelian
+- Melihat riwayat transaksi pribadi
+
+# Daftar Tabel & Field:
+1. users
+- id
+- nama
+- email
+- password
+- alamat
+- no_telepon
+- role
+  
+2.  produk
+- id
+- id_user (penjual)
+- id_kategori
+- nama_produk
+- deskripsi
+- stok
+- harga
+- foto_produk
+  
+3. kategori
+- id
+- nama_kategori
+  
+4. transaksi
+- id
+- id_user (pembeli)
+- tanggal
+- status_pembayaran
+- status_pengiriman
+- total_harga
+
+5. detail_transaksi
+- id
+- id_transaksi
+- id_produk
+- jumlah
+- subtotal
 
