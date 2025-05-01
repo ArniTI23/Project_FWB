@@ -58,3 +58,10 @@ Mamasa WECRA (Weaving Craft Marketplace) adalah aplikasi toko online berbasis La
 - jumlah
 - subtotal
 
+# Relasi Antar Tabel
+1. users – produk (One to Many)
+2. users – transaksi (One to Many)
+3. produk – detail_transaksi (One to Many)
+4. transaksi – detail_transaksi (One to Many)
+5. kategori – produk (One to Many)
+6. roles – users (One to Many)
