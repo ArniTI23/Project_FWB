@@ -23,9 +23,13 @@ Mamasa WECRA (Weaving Craft Marketplace) adalah aplikasi toko online berbasis La
 - password
 - alamat
 - no_telepon
-- role
+- id_role
+
+2. roles
+- id
+- nama_role (admin / penjual / pembeli)
   
-2.  produk
+3. produk
 - id
 - id_user (penjual)
 - id_kategori
@@ -35,11 +39,11 @@ Mamasa WECRA (Weaving Craft Marketplace) adalah aplikasi toko online berbasis La
 - harga
 - foto_produk
   
-3. kategori
+4. kategori
 - id
 - nama_kategori
   
-4. transaksi
+5. transaksi
 - id
 - id_user (pembeli)
 - tanggal
@@ -47,7 +51,7 @@ Mamasa WECRA (Weaving Craft Marketplace) adalah aplikasi toko online berbasis La
 - status_pengiriman
 - total_harga
 
-5. detail_transaksi
+6. detail_transaksi
 - id
 - id_transaksi
 - id_produk
