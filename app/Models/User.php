@@ -21,7 +21,23 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
+
+    public function produk()
+    {
+        return $this->hasMany(Produk::class, 'id_user');
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'id_user');
+    }
+
+    public function profil()
+    {
+        return $this->hasOne(Profil::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
