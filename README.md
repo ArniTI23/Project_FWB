@@ -42,8 +42,6 @@
 | alamat       | VARCHAR   | Alamat pengguna                      |
 | no_telepon   | VARCHAR   | Nomor HP                             |
 | role         | ENUM      | admin / penjual / pembeli            |
-| created_at   | TIMESTAMP | Timestamp otomatis Laravel           |
-| updated_at   | TIMESTAMP | Timestamp otomatis Laravel           |
 
 ---
 
@@ -66,8 +64,6 @@
 | stok          | INT       | Jumlah stok                               |
 | harga         | DECIMAL   | Harga produk                              |
 | foto_produk   | VARCHAR   | Path gambar produk                        |
-| created_at    | TIMESTAMP | Timestamp otomatis Laravel               |
-| updated_at    | TIMESTAMP | Timestamp otomatis Laravel               |
 
 ---
 
@@ -78,9 +74,6 @@
 | id_user    | INT       | FK ke `users.id` (pembeli)                |
 | id_produk  | INT       | FK ke `produk.id`                         |
 | jumlah     | INT       | Jumlah produk yang ditambahkan            |
-| created_at | TIMESTAMP | Timestamp otomatis Laravel                |
-| updated_at | TIMESTAMP | Timestamp otomatis Laravel                |
-
 ---
 
 ### 5. Tabel `transaksi`
@@ -94,8 +87,6 @@
 | status_pengiriman  | ENUM      | belum dikirim / dikirim / diterima                |
 | status_penarikan   | ENUM      | tertahan / dibayar ke penjual / dikembalikan      |
 | total_harga        | DECIMAL   | Total keseluruhan belanja                         |
-| created_at         | TIMESTAMP | Timestamp otomatis Laravel                         |
-| updated_at         | TIMESTAMP | Timestamp otomatis Laravel                         |
 
 ---
 
@@ -107,9 +98,6 @@
 | id_produk      | INT       | FK ke `produk.id`                      |
 | jumlah         | INT       | Jumlah produk dibeli                   |
 | subtotal       | DECIMAL   | Total harga dari produk * jumlah       |
-| created_at     | TIMESTAMP | Timestamp otomatis Laravel             |
-| updated_at     | TIMESTAMP | Timestamp otomatis Laravel             |
-
 ---
 
 ### 7. Tabel `rekening_bank`
@@ -120,9 +108,6 @@
 | nama_bank    | VARCHAR   | Nama bank (contoh: BRI, BCA, Mandiri, dll)  |
 | no_rekening  | VARCHAR   | Nomor rekening                              |
 | atas_nama    | VARCHAR   | Nama pemilik rekening                       |
-| created_at   | TIMESTAMP | Timestamp otomatis Laravel                  |
-| updated_at   | TIMESTAMP | Timestamp otomatis Laravel                  |
-
 ---
 ## Jenis relasi dan tabel yang berelasi
 
