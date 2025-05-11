@@ -1,4 +1,4 @@
-<h3 align="center">Mamasa WECRA (Weaving Craft Marketplace)</h3>
+<h3 align="center">Mamasa WECRA </h3>
 
 ---
 
