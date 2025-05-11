@@ -1,4 +1,4 @@
-<h3 align="center">Mamasa WECRA (Weaving Craft Marketplace)</h3>
+<h3 align="center">Mamasa WECRA </h3>
 
 ---
 
@@ -16,85 +16,100 @@
 ---
 ## Role dan Fitur-Fiturnya
 ### 1. Admin
-- Memantau dan mereview aktivitas pengguna dan transaksi
+- Melihat user lain yang memiliki akun di database
+- Menghapus akun penjual atau pembeli
+- Menghapus produk yang di post oleh penjual
 
 ### 2. Penjual
 - Menambah, mengedit, dan menghapus produk
 - Melihat daftar produk miliknya
-- Melihat riwayat transaksi terkait produk yang dijual
+- Melihat riwayat penjualan (dari detail transaksi)
 
 ### 3. Pembeli
 - Melihat dan mencari produk
 - Melakukan pembelian
-- Melihat riwayat transaksi pribadi
+- Melihat riwayat pembelian pribadi
 
 ---
 
 ## Tabel-tabel database beserta field dan tipe datanya
-### 1. Tabel `roles`
-| Field        | Tipe Data | Keterangan                      |
-|--------------|-----------|----------------------------------|
-| id           | INT       | Primary Key                     |
-| nama_role    | VARCHAR   | admin / penjual / pembeli       |
-
-### 2. Tabel `users`
-| Field        | Tipe Data | Keterangan                      |
-|--------------|-----------|----------------------------------|
-| id           | INT       | Primary Key                     |
-| nama         | VARCHAR   | Nama pengguna                   |
-| email        | VARCHAR   | Email unik                      |
-| password     | VARCHAR   | Kata sandi                      |
-| alamat       | VARCHAR   | Alamat pengguna                 |
-| no_telepon   | VARCHAR   | Nomor HP                        |
-| id_role      | INT       | Foreign Key ke `roles`          |
-
-### 3. Tabel `kategori`
-| Field        | Tipe Data | Keterangan                      |
-|--------------|-----------|----------------------------------|
-| id           | INT       | Primary Key                     |
-| nama_kategori| VARCHAR   | Nama kategori                   |
-
-### 4. Tabel `produk`
-| Field        | Tipe Data | Keterangan                      |
-|--------------|-----------|----------------------------------|
-| id           | INT       | Primary Key                     |
-| id_user      | INT       | Foreign Key ke `users` (penjual)|
-| id_kategori  | INT       | Foreign Key ke `kategori`       |
-| nama_produk  | VARCHAR   | Nama produk                     |
-| deskripsi    | TEXT      | Deskripsi produk                |
-| stok         | INT       | Jumlah stok                     |
-| harga        | DECIMAL   | Harga produk                    |
-| foto_produk  | VARCHAR   | Path gambar produk              |
-
-### 5. Tabel `transaksi`
-| Field            | Tipe Data | Keterangan                                |
-|------------------|-----------|--------------------------------------------|
-| id               | INT       | Primary Key                               |
-| id_user          | INT       | Foreign Key ke `users` (pembeli)          |
-| tanggal          | DATETIME  | Tanggal transaksi                         |
-| status_pembayaran| ENUM      | pending / selesai / dibatalkan            |
-| status_pengiriman| ENUM      | belum dikirim / dikirim / diterima        |
-| total_harga      | DECIMAL   | Total harga transaksi                     |
-
-### 6. Tabel `detail_transaksi`
-| Field        | Tipe Data | Keterangan                          |
-|--------------|-----------|--------------------------------------|
-| id           | INT       | Primary Key                         |
-| id_transaksi | INT       | Foreign Key ke `transaksi`          |
-| id_produk    | INT       | Foreign Key ke `produk`             |
-| jumlah       | INT       | Jumlah barang dibeli                |
-| subtotal     | DECIMAL   | Total harga dari produk * jumlah    |
+### 1. Tabel `users`
+| Field        | Tipe Data | Keterangan                           |
+|--------------|-----------|---------------------------------------|
+| id           | BIGINT    | Primary Key                          |
+| name         | VARCHAR   | Nama pengguna                        |
+| email        | VARCHAR   | Email unik                           |
+| password     | VARCHAR   | Kata sandi terenkripsi               |
+| role         | ENUM      | admin / penjual / pembeli            |
+| remember_token | VARCHAR | Token untuk remember me (opsional)   |
+| created_at   | TIMESTAMP | Waktu dibuat                         |
+| updated_at   | TIMESTAMP | Waktu diubah                         |
 
 ---
 
-## Jenis relasi dan tabel yang berelasi
-| Relasi               | Jenis Relasi  |
-|----------------------|---------------|
-| roles → users        | One to Many   |
-| users → produk       | One to Many   |
-| users → transaksi    | One to Many   |
-| produk → detail_transaksi | One to Many   |
-| transaksi → detail_transaksi | One to Many   |
-| kategori → produk    | One to Many   |
+### 2. Tabel `produk`
+| Field         | Tipe Data | Keterangan                                |
+|---------------|-----------|--------------------------------------------|
+| id            | BIGINT    | Primary Key                               |
+| id_user       | BIGINT    | FK ke `users.id` (penjual)                |
+| nama_produk   | VARCHAR   | Nama produk                               |
+| deskripsi     | TEXT      | Deskripsi produk                          |
+| stok          | INTEGER   | Jumlah stok                               |
+| harga         | DECIMAL   | Harga produk                              |
+| foto_produk   | VARCHAR   | Path gambar produk                        |
+| created_at    | TIMESTAMP | Waktu dibuat                              |
+| updated_at    | TIMESTAMP | Waktu diubah                              |
+
+---
+
+### 3. Tabel `transaksi`
+| Field              | Tipe Data | Keterangan                                         |
+|--------------------|-----------|----------------------------------------------------|
+| id                 | BIGINT    | Primary Key                                        |
+| id_user            | BIGINT    | FK ke `users.id` (pembeli)                        |
+| metode_pembayaran  | VARCHAR   | Metode pembayaran                                 |
+| status_pembayaran  | ENUM      | pending / selesai / dibatalkan                    |
+| total_harga        | DECIMAL   | Total keseluruhan belanja                         |
+| created_at         | TIMESTAMP | Waktu dibuat                                      |
+| updated_at         | TIMESTAMP | Waktu diubah                                      |
+
+---
+
+### 4. Tabel `detail_transaksi`
+| Field          | Tipe Data | Keterangan                             |
+|----------------|-----------|-----------------------------------------|
+| id             | BIGINT    | Primary Key                            |
+| id_transaksi   | BIGINT    | FK ke `transaksi.id`                   |
+| id_produk      | BIGINT    | FK ke `produk.id`                      |
+| jumlah         | INTEGER   | Jumlah produk dibeli                   |
+| subtotal       | DECIMAL   | Total harga dari produk * jumlah       |
+| created_at     | TIMESTAMP | Waktu dibuat                           |
+| updated_at     | TIMESTAMP | Waktu diubah                           |
+
+---
+
+### 5. Tabel `profil`
+| Field        | Tipe Data | Keterangan                            |
+|--------------|-----------|----------------------------------------|
+| id           | BIGINT    | Primary Key                           |
+| user_id      | BIGINT    | FK ke `users.id`                      |
+| foto_profil  | VARCHAR   | Path foto profil                      |
+| bio          | TEXT      | Singkat tentang pengguna              |
+| deskripsi    | TEXT      | Deskripsi lengkap pengguna            |
+| created_at   | TIMESTAMP | Waktu dibuat                          |
+| updated_at   | TIMESTAMP | Waktu diubah                          |
+
+---
+
+## Jenis Relasi dan Tabel yang Berelasi
+
+| Relasi                             | Jenis Relasi  |
+|------------------------------------|----------------|
+| `users` → `produk`                 | One to Many    |
+| `users` → `transaksi`             | One to Many    |
+| `transaksi` → `detail_transaksi`  | One to Many    |
+| `produk` → `detail_transaksi`     | One to Many    |
+| `users` → `profil`                | One to One     |
+| `produk` ↔ `transaksi` *(via detail_transaksi)* | Many to Many |
 
 ---
