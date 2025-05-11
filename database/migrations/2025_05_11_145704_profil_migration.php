@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('foto_profil');
             $table->text('bio');
             $table->text('deskripsi');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

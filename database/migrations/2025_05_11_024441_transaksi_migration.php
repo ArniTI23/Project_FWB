@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->string('metode_pembayaran');
             $table->enum('status_pembayaran', ['pending', 'selesai', 'dibatalkan']);
-            $table->decimal('total_harga', 10, 2);
+            $table->decimal('total_harga', 10, 2); 
             $table->timestamps();
         });
     }
