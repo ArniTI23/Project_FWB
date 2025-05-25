@@ -1,44 +1,58 @@
-<!-- filepath: d:\Aplikasi\laragon\www\ProjectFWB\resources\views\penjual\editProduk.blade.php -->
 @extends('layouts.app')
+
 @section('content')
-<div class="container mt-5"> <!-- Tambahkan margin atas di sini -->
-    <h2 class="text-dark text-center mb-4">Edit Produk</h2> <!-- Tambahkan judul untuk konteks -->
-    <form class="forms-sample mt-4" method="POST" enctype="multipart/form-data"> <!-- Tambahkan margin atas pada form -->
-        @csrf
-        <!-- Nama Produk -->
-        <div class="mb-4"> <!-- Tambahkan margin bawah yang lebih besar -->
-            <label for="nama_produk" class="form-label text-dark">Nama Produk</label>
-            <input type="text" class="form-control border text-dark" name="nama_produk" value="{{ $produk->nama_produk }}" id="nama_produk" required>
-        </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="card shadow-lg" style="max-width:900px;margin:auto;">
+                <div class="card-header bg-primary text-dark text-center py-2">
+                    <h5 class="mb-0">Edit Produk</h5>
+                </div>
+                <div class="card-body text-dark py-3">
+                    <form method="POST" enctype="multipart/form-data">
+                        @csrf
 
-        <!-- Deskripsi -->
-        <div class="mb-4">
-            <label for="deskripsi" class="form-label text-dark">Deskripsi</label>
-            <textarea class="form-control border text-dark" name="deskripsi" id="deskripsi" rows="4" required>{{ $produk->deskripsi }}</textarea>
-        </div>
+                        <!-- Nama Produk -->
+                        <div class="mb-2">
+                            <label for="nama_produk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="nama_produk" id="nama_produk" value="{{ $produk->nama_produk }}" required>
+                        </div>
 
-        <!-- Stok -->
-        <div class="mb-4">
-            <label for="stok" class="form-label text-dark">Stok</label>
-            <input type="number" step="0.01" class="form-control border text-dark" name="stok" value="{{ $produk->stok }}" id="stok" required>
-        </div>
+                        <!-- Deskripsi -->
+                        <div class="mb-2">
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" name="deskripsi" id="deskripsi" rows="2" maxlength="100" required>{{ $produk->deskripsi }}</textarea>
+                        </div>
 
-        <!-- Harga -->
-        <div class="mb-4">
-            <label for="harga" class="form-label text-dark">Harga (Rp)</label>
-            <input type="number" step="0.01" class="form-control border text-dark" name="harga" value="{{ $produk->harga }}" id="harga" required>
-        </div>
+                        <!-- Stok -->
+                        <div class="mb-2">
+                            <label for="stok" class="form-label">Stok</label>
+                            <input type="number" step="0.01" class="form-control" name="stok" id="stok" value="{{ $produk->stok }}" required>
+                        </div>
 
-        <!-- Foto Produk -->
-        <div class="mb-4">
-            <label for="foto_produk" class="form-label text-dark">Foto Produk</label>
-            <input type="file" class="form-control border text-dark" name="foto_produk" id="foto_produk" accept="image/*">
-            @if ($produk->foto_produk)
-                <img src="{{ asset('storage/' . $produk->foto_produk) }}" alt="Foto Produk" class="img-fluid mt-3" style="max-height: 150px;">
-            @endif
-        </div>
+                        <!-- Harga -->
+                        <div class="mb-2">
+                            <label for="harga" class="form-label">Harga (Rp)</label>
+                            <input type="number" step="0.01" class="form-control" name="harga" id="harga" value="{{ $produk->harga }}" required>
+                        </div>
 
-        <button type="submit" class="btn btn-primary w-100">Simpan Produk</button> <!-- Tombol diperlebar -->
-    </form>
+                        <!-- Foto Produk -->
+                        <div class="mb-3">
+                            <label for="foto_produk" class="form-label">Foto Produk</label>
+                            <input type="file" class="form-control" name="foto_produk" id="foto_produk" accept="image/*">
+                            @if ($produk->foto_produk)
+                                <div class="mt-2">
+                                    <img src="{{ asset('storage/' . $produk->foto_produk) }}" alt="Foto Produk" class="img-fluid" style="max-height: 150px;">
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Tombol Simpan -->
+                        <button type="submit" class="btn btn-primary w-100">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
