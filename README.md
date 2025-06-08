@@ -19,6 +19,7 @@
 - Melihat user lain yang memiliki akun di database
 - Menghapus akun penjual atau pembeli
 - Menghapus produk yang di post oleh penjual
+- Melihat Riwayat transaksi
 
 ### 2. Penjual
 - Menambah, mengedit, dan menghapus produk
